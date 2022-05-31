@@ -2,3 +2,4 @@
 1 last digit
 2 print alphabet
 3 print alphabet with exceptions
+4 print hexadecimal
