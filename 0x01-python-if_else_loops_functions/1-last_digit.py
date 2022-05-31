@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 from contextlib import nullcontext
 import random
-# number = random.randint(-10000, 10000)
-number = "hello"
+number = random.randint(-10000, 10000)
 try:
     last_digit = int(repr(number)[-1])
 except ValueError:
