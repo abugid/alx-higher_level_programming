@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """
-return state id given state name; SQL injection free
-parameters given to script: username, password, database, state name to match
+This script prints the State object id
+with the name passed as argument
+from the database `hbtn_0e_6_usa`.
 """
 
 from sys import argv
@@ -9,23 +10,21 @@ from model_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-
 if __name__ == "__main__":
+    """
+    Access to the database and get a state
+    from the database.
+    """
 
-    # make engine for database
-    user = argv[1]
-    passwd = argv[2]
-    db = argv[3]
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.
-                           format(user, passwd, db), pool_pre_ping=True)
-    Base.metadata.create_all(engine)
+    db_uri = 'mysql+mysqldb://{}:{}@localhost:3306/{}'.format(
+        argv[1], argv[2], argv[3])
+    engine = create_engine(db_uri)
     Session = sessionmaker(bind=engine)
-    session = Session()
 
-    # query python instance in database state id given state name
-    state = session.query(State).filter_by(name=argv[4]).first()
-    if state:
-        print("{:d}".format(state.id))
+    session = Session()
+    instance = session.query(State).filter(State.name == argv[4]).first()
+
+    if instance is None:
+        print('Not found')
     else:
-        print("Not found")
-    session.close()
+        print('{0}'.format(instance.id))

@@ -1,30 +1,37 @@
 #!/usr/bin/python3
 """
-return info from both tables (tables 'cities' 'states)
-parameters given to script: username, password, database
+This script lists all cities from
+the database `hbtn_0e_4_usa`.
 """
 
 import MySQLdb
 from sys import argv
 
-if __name__ == "__main__":
+if __name__ == '__main__':
+    """
+    Access to the database and get the cities
+    from the database.
+    """
 
-    # connect to database
-    db = MySQLdb.connect(host="localhost",
-                         port=3306,
-                         user=argv[1],
-                         passwd=argv[2],
-                         db=argv[3])
+    db = MySQLdb.connect(host="localhost", user=argv[1], port=3306,
+                         passwd=argv[2], db=argv[3])
 
-    # create cursor to exec queries using SQL; join two tables for all info
-    cursor = db.cursor()
-    sql_cmd = """SELECT cities.id, cities.name, states.name
-                 FROM states
-                 INNER JOIN cities ON states.id = cities.state_id
-                 ORDER BY cities.id ASC"""
-    cursor.execute(sql_cmd)
+    with db.cursor() as cur:
+        cur.execute("""
+            SELECT
+                cities.id, cities.name, states.name
+            FROM
+                cities
+            JOIN
+                states
+            ON
+                cities.state_id = states.id
+            ORDER BY
+                cities.id ASC
+        """)
 
-    for row in cursor.fetchall():
-        print(row)
-    cursor.close()
-    db.close()
+        rows = cur.fetchall()
+
+    if rows is not None:
+        for row in rows:
+            print(row)
