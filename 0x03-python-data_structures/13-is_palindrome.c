@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "lists.h"
 /**
- * is_palindrome - checks if linked list is a palindrome
+ * is_palindrome - checks if a linked list is a palindrome
  * @head: pointer to the address of a pointer that points to the head of a node
  * Return: 1 if it is a palindrome 0 otherwise
  */
@@ -22,6 +22,7 @@ num1 = tmp->n;
 if (k == i)
 {
 num2 = tmp->n;
+}
 }
 if (num1 != num2)
 return (0);
