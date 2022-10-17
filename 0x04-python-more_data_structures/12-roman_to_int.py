@@ -1,22 +1,36 @@
 #!/usr/bin/python3
-
 def roman_to_int(roman_string):
-    roman_num = {
-        "I": 1,
-        "V": 5,
-        "X": 10,
-        "L": 50,
-        "C": 100,
-        "D": 500,
-        "M": 1000
-    }
-    if (roman_string is None or type(roman_string) != str):
-        return 0
-    total = 0
-    for char in roman_string:
-        try:
-            total += roman_num[char]
-        except KeyError:
-            return 0
+    sum_total = 0
+    ps = False
+    rom_num = {
+        'I': 1,
+        'X': 10,
+        'C': 100,
+        'M': 1000,
+        'V': 5,
+        'L': 50,
+        'D': 500
+        }
 
-    return total
+    val3 = {'I': 'V', 'X': 'L', 'C': 'D', 'M': None}
+    val4 = {'I': 'X', 'X': 'C', 'C': 'M', 'M': None}
+
+    for i, c in enumerate(roman_string):
+        if ps:
+            ps = False
+            continue
+        if c in val3.keys():
+            if i != len(roman_string) - 1:
+                if roman_string[i + 1] == val3[c]:
+                    sum_total += rom_num[val3[c]] - rom_num[c]
+                    ps = True
+                elif roman_string[i + 1] == val4[c]:
+                    sum_total += rom_num[val4[c]] - rom_num[c]
+                    ps = True
+                else:
+                    sum_total += rom_num[c]
+            else:
+                sum_total += rom_num[c]
+        else:
+            sum_total += rom_num[c]
+    return sum_total
