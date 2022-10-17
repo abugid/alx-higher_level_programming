@@ -15,6 +15,8 @@ def roman_to_int(roman_string):
     val3 = {'I': 'V', 'X': 'L', 'C': 'D', 'M': None}
     val4 = {'I': 'X', 'X': 'C', 'C': 'M', 'M': None}
 
+    if (roman_string is None) or type(roman_string) != str:
+        return 0
     for i, c in enumerate(roman_string):
         if ps:
             ps = False
