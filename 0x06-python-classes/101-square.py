@@ -53,7 +53,7 @@ class Square:
 
     def get_str(self):
         total = ""
-        if self.__size is 0:
+        if self.__size == 0:
             total += "\n"
             return total
         for i in range(self.__position[1]):
