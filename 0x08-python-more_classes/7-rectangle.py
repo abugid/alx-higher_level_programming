@@ -19,7 +19,6 @@ class Rectangle:
         self.height = height
         self.width = width
         Rectangle.number_of_instances += 1
-        type(self).print_symbol = "#"
 
     @property
     def width(self):
@@ -44,14 +43,6 @@ class Rectangle:
         elif value < 0:
             raise ValueError("height must be >= 0")
         self.__height = value
-
-    @property
-    def print_symbol(self):
-        return type(self).print_symbol
-
-    @print_symbol.setter
-    def print_symbol(self, value):
-        type(self).print_symbol = value
 
     def area(self):
         return self.width * self.height
