@@ -67,12 +67,17 @@ for i in range(n_size):
 
         if node_depth == n_size - 1:
             cur_sol = []
-            while (cur_node is not root):
-                cur_sol.append(cur_node.data)
-                cur_node = cur_node.parent
+            tmp_node = cur_node
+            while (tmp_node is not root):
+                cur_sol.append(tmp_node.data)
+                tmp_node = tmp_node.parent
             solution.append(cur_sol)
-            break
+            start_data = cur_node.data + 1
+            cur_node = cur_node.parent
+            node_depth -= 1
+
 solution.reverse()
 new_sol = [[[idx, j] for idx, j in enumerate(i)] for i in solution]
 for i in new_sol:
     print(i)
+print(len(new_sol))
