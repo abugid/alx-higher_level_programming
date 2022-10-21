@@ -1,0 +1,23 @@
+The ``Text Indentation`` module
+===============================
+
+Using ``text_indentation``
+---------------------------
+
+This is a text file in reStructuredText format.
+First we have to import ``text_indentation`` from the ``Text Indentation`` module:
+
+    >>> text_indentation = __import__("5-text_indentation").text_indentation
+
+Now use it:
+
+    >>> text_indentation(5)
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+    >>> text_indentation(" hello. hi ") # doctest: +REPORT_NDIFF
+    hello.
+    <BLANKLINE>
+    hi
+
+    >>> text_indentation("")
