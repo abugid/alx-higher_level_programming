@@ -80,4 +80,3 @@ solution.reverse()
 new_sol = [[[idx, j] for idx, j in enumerate(i)] for i in solution]
 for i in new_sol:
     print(i)
-print(len(new_sol))
