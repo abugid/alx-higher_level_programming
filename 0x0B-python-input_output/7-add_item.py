@@ -11,17 +11,16 @@ Contains function that adds and saves to Python obj to JSON file; loads objects
 # cat add_item.json ; echo ""
 # expect output: ["some", "random", "args"]
 """
-
-
-from sys import argv
-save_to_json_file = __import__('5-save_to_json_file').save_to_json_file
-load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
-
-filename = "add_item.json"
+import json
+import sys
+saveJson = __import__('5-save_to_json_file').save_to_json_file
+loadJson = __import__('6-load_from_json_file').load_from_json_file
 
 try:
-    existing_content = load_from_json_file(filename)
-except FileNotFoundError:
-    existing_content = []
+    a = loadJson("add_item.json")
+except (json.JSONDecodeError, FileNotFoundError):
+    a = []
 
-save_to_json_file(existing_content + argv[1:], filename)
+for i in range(1, len(sys.argv)):
+    a.append(sys.argv[i])
+saveJson(a, "add_item.json")
